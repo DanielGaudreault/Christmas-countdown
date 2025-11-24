@@ -20,13 +20,16 @@
             position: relative;
         }
         
+        /* Snowflakes */
         .snowflake {
             position: absolute;
             top: -10px;
             color: #fff;
             font-size: 1em;
-            animation: fall linear forwards;
+            animation: fall linear infinite;
             z-index: 1;
+            user-select: none;
+            pointer-events: none;
         }
         
         @keyframes fall {
@@ -210,7 +213,7 @@
     </style>
 </head>
 <body>
-    <!-- Snowflakes -->
+    <!-- Snowflakes will be generated here -->
     <div id="snowflakes-container"></div>
     
     <div class="container">
@@ -261,10 +264,10 @@
     </div>
 
     <script>
-        // Create snowflakes
+        // Create continuous snowflakes
         function createSnowflakes() {
             const container = document.getElementById('snowflakes-container');
-            const snowflakeCount = 50;
+            const snowflakeCount = 100; // Increased number for continuous effect
             
             for (let i = 0; i < snowflakeCount; i++) {
                 const snowflake = document.createElement('div');
@@ -276,11 +279,13 @@
                 const left = Math.random() * 100;
                 const animationDuration = Math.random() * 10 + 5;
                 const opacity = Math.random() * 0.7 + 0.3;
+                const animationDelay = Math.random() * 15; // Stagger the start times
                 
                 snowflake.style.left = `${left}vw`;
                 snowflake.style.fontSize = `${size}em`;
                 snowflake.style.animationDuration = `${animationDuration}s`;
                 snowflake.style.opacity = opacity;
+                snowflake.style.animationDelay = `${animationDelay}s`;
                 
                 container.appendChild(snowflake);
             }
